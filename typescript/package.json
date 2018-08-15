@@ -3,7 +3,9 @@
     "build": "tsc",
     "lint": "tslint --project tsconfig.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gremlin": "^3.2.9"
+  },
   "devDependencies": {
     "@types/node": "^10.7.1",
     "prettier": "^1.14.2",
