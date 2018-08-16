@@ -1,8 +1,9 @@
 import { driver, structure } from "gremlin";
+import { argv } from "process";
 
 const g = new structure.Graph()
   .traversal()
-  .withRemote(new driver.DriverRemoteConnection("ws://localhost:8182/gremlin"));
+  .withRemote(new driver.DriverRemoteConnection(argv[2]));
 
 setInterval(async () => {
   try {
