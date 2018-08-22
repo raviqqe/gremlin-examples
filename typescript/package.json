@@ -3,7 +3,7 @@
     "build": "tsc",
     "lint": "tslint --project tsconfig.json",
     "docker:build": "sudo docker build -t gremlin .",
-    "docker:run": "sudo docker run -e endpoint=ws://localhost:1234 gremlin "
+    "docker:run": "sudo docker run -e endpoint=ws://localhost:1234 --rm gremlin "
   },
   "dependencies": {
     "gremlin": "^3.2.9"
