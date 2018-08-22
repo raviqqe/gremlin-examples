@@ -10,8 +10,8 @@ setInterval(async () => {
     console.log(
       await g
         .V()
-        .has("name", "jupiter")
-        .out("brother")
+        .has("id", "0")
+        .out("follow")
         .values("name")
         .toList()
     );
