@@ -4,6 +4,7 @@
     "target": "es5",
     "lib": ["esnext"],
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "downlevelIteration": true
   }
 }

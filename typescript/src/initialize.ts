@@ -5,24 +5,28 @@ const g = new structure.Graph()
   .traversal()
   .withRemote(new driver.DriverRemoteConnection(argv[2]));
 
+interface IUser {
+  id: string;
+  name: string;
+}
+
+const users: IUser[] = [
+  { id: "0", name: "Steven Rogers" },
+  { id: "1", name: "Clinton Barton" },
+  { id: "2", name: "Pietro Maximoff" }
+];
+
 function main() {
-  const s = g.addV("user");
-  s.property("id", "0");
-  s.property("name", "Steven Rogers");
+  const verticies = users.map(({ id, name }) =>
+    g
+      .addV("user")
+      .property("id", id)
+      .property("name", name)
+  );
 
-  const c = g.addV("user");
-  c.property("id", "1");
-  c.property("name", "Clinton Barton");
-  g.addE("follow")
-    .from(s)
-    .to(c);
-
-  const p = g.addV("user");
-  p.property("id", "2");
-  p.property("name", "Pietro Maximoff");
-  g.addE("follow")
-    .from(c)
-    .to(p);
+  for (const i of new Array(verticies.length - 1).keys()) {
+    verticies[i].addE("follow", verticies[i + 1]);
+  }
 }
 
 main();
