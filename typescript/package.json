@@ -2,8 +2,9 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project tsconfig.json",
-    "docker:build": "sudo docker build -t gremlin .",
-    "docker:run": "sudo docker run -e endpoint=ws://localhost:1234 --rm gremlin "
+    "docker:build": "sudo docker build -t raviqqe/gremlin-typescript .",
+    "docker:run": "sudo docker run -e endpoint=ws://localhost:1234 --rm raviqqe/gremlin-typescript",
+    "docker:push": "sudo docker push raviqqe/gremlin-typescript"
   },
   "dependencies": {
     "gremlin": "^3.2.9"
