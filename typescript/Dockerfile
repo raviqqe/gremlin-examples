@@ -6,10 +6,7 @@ WORKDIR /gremlin
 
 RUN rm -rf node_modules
 RUN npm install
-RUN npm run build
 
 ENV endpoint ""
 
-ENTRYPOINT node dist/initialize.js $endpoint
-
-CMD node dist/index.js $endpoint
+CMD npm run initialize $endpoint && npm run serve $endpoint
