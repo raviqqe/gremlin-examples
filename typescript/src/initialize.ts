@@ -1,9 +1,6 @@
-import { driver, structure } from "gremlin";
 import { argv } from "process";
 
-const g = new structure.Graph()
-  .traversal()
-  .withRemote(new driver.DriverRemoteConnection(argv[2]));
+import runQuery from "./run-query";
 
 interface IUser {
   id: string;
@@ -16,17 +13,25 @@ const users: IUser[] = [
   { id: "2", name: "Pietro Maximoff" }
 ];
 
-function main() {
-  const verticies = users.map(({ id, name }) =>
-    g
+runQuery(argv[2], g => {
+  for (const { id, name } of users) {
+    g = g
       .addV("user")
       .property("id", id)
       .property("name", name)
-  );
-
-  for (const i of new Array(verticies.length - 1).keys()) {
-    verticies[i].addE("follow", verticies[i + 1]);
+      .as(id);
   }
-}
 
-main();
+  for (const [i, { id, name }] of users.entries()) {
+    const nextUser = users[i + 1];
+
+    if (nextUser) {
+      g = g
+        .addE("follow")
+        .from_(id)
+        .to(nextUser.id);
+    }
+  }
+
+  return g;
+});
